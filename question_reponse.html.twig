@@ -1,0 +1,113 @@
+{% extends 'blog1.html.twig' %}
+
+{% block body %}
+    <br><br>
+    <br><br>
+    <div class="breadcrumb-style-7">
+        <div class="breadcrumb-inner">
+            <h1 class="page-title">Comments {{ numberofcomments }}</h1>
+            <ul class="page-list">
+                <li><a href="#">Commentaire Details</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="blog-single-content">
+    <div class="container">
+        <div class="row">
+            <div class="blog-details-item">
+                <div class="thumb border-thumb">
+                    <div class="post-thumbnail">
+
+                    </div>
+                </div>
+                <div class="content margin-top-75">
+                    <h5 class="margin-bottom-30"> </h5>
+                    <p class="margin-top-30">{{a.contenu|raw }} </p><ul class="post-meta margin-top-50">
+                        <li><a href="#"><i class="fa fa-user"></i> {{ app.user.username }}</a></li>
+
+                        <li><a href="#"><i class="fa fa-comments"></i> Comments {{ numberofcomments }}</a></li>
+                        <li><a href="{{ path('likearticle',{id:a.id}) }}"><i class="fa fa-thumbs-up"></i> {{ numlikes }}</a></li>
+
+
+                    </ul>
+
+                    <div class="btn-wrapper desktop-left">
+                        <br>
+                        <br>
+                        <br>
+
+                        {% if app.user %}
+                            <a href="{{  path('articles_supprimer', {'id':a.id}) }}" class=" sm-btn"> supprimer</a>
+                            <a href="{{ path('articles_update', {'id':a.id}) }} " class=" sm-btn black-btn">update</a>
+                        {% endif %}
+
+                    </div>
+
+
+
+
+                    {% for comment in comments  %}
+                        <div class="comment-area">
+                            <ul class="comment-list">
+                                <li class="parent">
+                                    <div class="single-comment-wrap">
+
+                                        <div class="thumb">
+                                        </div>
+                                        <div class="content">
+                                            <h4 class="title">{{ comment.user }}</h4>
+                                            <div class="comment-content">
+
+                                                <p> {{ comment.contenu }}.</p>
+                                            </div>
+                               <a style="color:#00ad45"href="{{  path('commentaire_supprimer', {'id':comment.id}) }}"><i class="material-icons">delete</i></a>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+
+
+
+
+
+                    <div class="comment-area">
+
+                        <ul class="comment-list">
+                            <li class="parent">
+                                <div class="single-comment-wrap">
+
+
+
+                                    <form method="post" class="tm-form mt-30" id="formcomment">
+                                        <div class="tm-form-inner">
+
+                                            <div class="tm-form-field">
+                                                <textarea name="comment-content" cols="30"
+                                                          rows="7" placeholder="Enter your comment"></textarea>
+                                                <span class="tm-form-animatedline"></span>
+                                            </div>
+                                            <div class="tm-form-field">
+                                                <button type="submit" class="tm-button tm-button-dark">Post
+                                                    Comment
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}
